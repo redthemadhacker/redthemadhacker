@@ -58,6 +58,23 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleGlobalKey);
   }, []);
 
+  // Ensure favicon is dynamically updated to the exact synced logo
+  useEffect(() => {
+    try {
+      const savedLogo = localStorage.getItem('mad_hacker_logo_data');
+      if (savedLogo) {
+        const iconLinks = document.querySelectorAll<HTMLLinkElement>(
+          "link[rel*='icon'], link[rel='apple-touch-icon']"
+        );
+        iconLinks.forEach((link) => {
+          link.href = savedLogo;
+        });
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#070709] text-zinc-100 flex flex-col selection:bg-[#ff1a2a]/30 selection:text-white relative">
       {/* Top Navbar */}
