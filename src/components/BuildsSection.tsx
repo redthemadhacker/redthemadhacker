@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BUILDS_DATA, Project } from '../data/portfolioData';
 import { PageNavBar, PageId } from './PageNavBar';
-import { ExternalLink, Terminal, Layers, ArrowUpRight, Info, Sparkles, Shield, Globe } from 'lucide-react';
+import { ExternalLink, Terminal, Layers, ArrowUpRight, Info } from 'lucide-react';
 
 interface BuildsSectionProps {
   onSelectProject: (project: Project) => void;
@@ -19,11 +19,13 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
   const [filter, setFilter] = useState<'all' | 'flagship' | 'apps' | 'security' | 'tools'>('all');
   const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
 
-  const toggleFlip = (id: string, e: React.MouseEvent) => {
-    // Only flip if not clicking a link or button
-    const target = e.target as HTMLElement;
-    if (target.closest('a') || target.closest('button')) {
-      return;
+  const toggleFlip = (id: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+      const target = e.target as HTMLElement;
+      if (target.closest('a')) {
+        return;
+      }
     }
     setFlippedCards((prev) => ({
       ...prev,
@@ -69,7 +71,7 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
             </p>
           </div>
 
-          {/* Interactive Filter Controls (Segmented functional buttons) */}
+          {/* Interactive Filter Controls */}
           <div className="flex items-center flex-wrap gap-1 p-1 bg-zinc-950 border border-zinc-800 rounded-lg">
             {filterTabs.map((tab) => (
               <button
@@ -140,7 +142,7 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                         </p>
                       </div>
 
-                      {/* Description - Complete Sentence with No Cutoff */}
+                      {/* Description */}
                       <p className="mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
                         {project.description}
                       </p>
@@ -148,7 +150,7 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
 
                     {/* Bottom Area */}
                     <div>
-                      {/* Tech stack metadata (unboxed text with separators) */}
+                      {/* Tech stack metadata */}
                       <div className="pt-3 border-t border-zinc-900 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-mono-code text-zinc-400">
                         {project.tags.map((tag, idx) => (
                           <React.Fragment key={tag}>
@@ -160,8 +162,8 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                         ))}
                       </div>
 
-                      {/* Action buttons */}
-                      <div className="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-2">
+                      {/* Action buttons (Normalized line layout) */}
+                      <div className="mt-4 pt-3 border-t border-zinc-800/80 flex items-center gap-2">
                         {project.isArchived ? (
                           <button
                             type="button"
@@ -169,10 +171,10 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                               e.stopPropagation();
                               if (onOpenArchivedNotice) onOpenArchivedNotice(project);
                             }}
-                            className="flex-1 py-2 px-3 text-center text-xs font-mono-code font-bold text-white bg-zinc-850 hover:bg-zinc-800 border border-zinc-700 rounded transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 cursor-pointer"
+                            className="flex-1 h-9 px-3 text-center text-xs font-mono-code font-bold text-white bg-zinc-800 hover:bg-zinc-750 border border-zinc-700 rounded transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 cursor-pointer truncate"
                           >
                             <span>ACADEMIC ARCHIVE</span>
-                            <ExternalLink className="w-3.5 h-3.5 text-[#ff1a2a]" />
+                            <ExternalLink className="w-3.5 h-3.5 text-[#ff1a2a] shrink-0" />
                           </button>
                         ) : project.liveUrl ? (
                           <a
@@ -180,18 +182,20 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="flex-1 py-2 px-3 text-center text-xs font-mono-code font-bold text-black bg-[#ff1a2a] hover:bg-[#ff3342] rounded transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 cursor-pointer whitespace-nowrap"
+                            className="flex-1 h-9 px-3 text-center text-xs font-mono-code font-bold text-black bg-[#ff1a2a] hover:bg-[#ff3342] rounded transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 cursor-pointer whitespace-nowrap truncate"
                           >
-                            <span>
+                            <span className="truncate">
                               {project.id === 'phonixia-fund'
                                 ? 'CONTRIBUTE TO FUND'
                                 : project.id === 'all-nyte-all-byte' || project.category === 'tools'
-                                ? 'VIEW REPOSITORY'
+                                ? 'LAUNCH LIVE'
                                 : 'LAUNCH LIVE'}
                             </span>
-                            <ArrowUpRight className="w-3.5 h-3.5" />
+                            <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
                           </a>
-                        ) : null}
+                        ) : (
+                          <div className="flex-1 h-9" />
+                        )}
 
                         <button
                           type="button"
@@ -199,7 +203,7 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                             e.stopPropagation();
                             onSelectProject(project);
                           }}
-                          className="py-2 px-3 text-xs font-mono-code text-zinc-300 hover:text-white bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded transition-all flex items-center justify-center gap-1 active:scale-95"
+                          className="h-9 px-3 shrink-0 text-xs font-mono-code text-zinc-300 hover:text-white bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded transition-all flex items-center justify-center gap-1 active:scale-95 cursor-pointer"
                           title="Open Full Architectural Dossier"
                         >
                           <Info className="w-3.5 h-3.5 text-[#ff1a2a]" />
@@ -210,12 +214,12 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
-                            toggleFlip(project.id, e);
+                            toggleFlip(project.id);
                           }}
-                          className="p-2 text-xs font-mono-code text-zinc-400 hover:text-[#ff1a2a] bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 rounded transition-all"
-                          title="Flip card for technical highlights"
+                          className="h-9 w-9 shrink-0 flex items-center justify-center text-xs font-mono-code text-zinc-400 hover:text-white hover:border-[#ff1a2a] bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 rounded transition-all cursor-pointer shadow-sm active:scale-95"
+                          title="Flip card to reveal architectural highlights"
                         >
-                          <Layers className="w-3.5 h-3.5" />
+                          <Layers className="w-4 h-4 text-[#ff1a2a]" />
                         </button>
                       </div>
                     </div>
@@ -240,7 +244,7 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                         {project.highlights.map((h, i) => (
                           <li key={i} className="flex items-start gap-2">
                             <span className="text-[#ff1a2a] mt-0.5 font-bold">›</span>
-                            <span>{h}</span>
+                            <span className="leading-relaxed">{h}</span>
                           </li>
                         ))}
                       </ul>
@@ -261,7 +265,7 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="flex-1 py-2 px-3 text-center text-xs font-mono-code font-bold text-black bg-[#ff1a2a] hover:bg-[#ff3342] rounded transition-all flex items-center justify-center gap-1.5"
+                          className="flex-1 h-9 px-3 text-center text-xs font-mono-code font-bold text-black bg-[#ff1a2a] hover:bg-[#ff3342] rounded transition-all flex items-center justify-center gap-1.5"
                         >
                           <span>OPEN SITE</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -272,9 +276,9 @@ export const BuildsSection: React.FC<BuildsSectionProps> = ({
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          toggleFlip(project.id, e);
+                          toggleFlip(project.id);
                         }}
-                        className="py-2 px-3 text-xs font-mono-code text-zinc-300 hover:text-white bg-zinc-900 border border-zinc-700 rounded transition-all"
+                        className="h-9 px-3 text-xs font-mono-code text-zinc-300 hover:text-white bg-zinc-900 border border-zinc-700 hover:border-zinc-500 rounded transition-all cursor-pointer flex items-center justify-center"
                       >
                         FLIP BACK ↺
                       </button>

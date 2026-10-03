@@ -173,7 +173,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onOpenTerminal }
           </a>
 
           <a
-            href="https://github.com/redthemadhacker"
+            href="https://www.allnyteallbyte.co"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-lg bg-zinc-900/90 border border-zinc-800 hover:border-[#ff1a2a] transition-all flex flex-col justify-between group"

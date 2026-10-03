@@ -71,13 +71,13 @@ export const BIO_DATA = {
   primaryLinks: {
     fund: "https://www.phonixia.fund/",
     beta: "https://phonixia-7c9c93ef0d42.herokuapp.com/",
-    businessRepo: "https://github.com/redthemadhacker",
+    businessRepo: "https://www.allnyteallbyte.co",
     github: "https://github.com/redthemadhacker",
     cylab: "https://learn.cylabacademy.org/users/redthemadhacker",
     linkedin: "https://linkedin.com/in/amari-james",
-    email: "mailto:marbusiness98@gmail.com?subject=Contact%20Amari&body=Hey%20Amari,",
+    email: "mailto:redthemadhacker@gmail.com?subject=Contact%20Amari&body=Hey%20Amari,",
     phone: "tel:9856451621",
-    rawEmail: "marbusiness98@gmail.com",
+    rawEmail: "redthemadhacker@gmail.com",
     encryptedPhone: "[ENCRYPTED // SOCKET-01]"
   }
 };
@@ -136,8 +136,8 @@ export const BUILDS_DATA: Project[] = [
     longDescription:
       "The dedicated business and cybersecurity branch of Amari James. Originating from the Byte Lab initiative, All Nyte All Byte delivers tailored endpoint security audits, workflow automation pipelines, and custom software systems.",
     tags: ["Byte Lab", "Bespoke Security Solutions", "DevSecOps", "Automation Pipelines", "Client Workflows"],
-    liveUrl: "https://github.com/redthemadhacker",
-    githubUrl: "https://github.com/redthemadhacker",
+    liveUrl: "https://www.allnyteallbyte.co",
+    githubUrl: "https://github.com/redthemadhacker/allnyteallbyte",
     highlights: [
       "Secure client intake and scope specification workflows",
       "Standardized security assessment delivery pipeline",
@@ -344,10 +344,10 @@ export const EXPERIENCE_DATA: ExperienceRole[] = [
     summary:
       "Supported enterprise client infrastructure, resolving complex hardware and software incidents, enforcing strict data security protocols, and evaluating escalation authorizations.",
     responsibilities: [
-      "Diagnosed and resolved critical hardware and operating system failures under tight SLA timelines.",
-      "Ensured strict adherence to secure data handling procedures and enterprise security frameworks.",
-      "Provided peer support and technical escalation review for complex cross-platform user tickets.",
-      "Documented root-cause analyses and standardized technical resolution knowledge-base articles."
+      "Diagnose and resolve critical hardware and operating system failures under tight SLA timelines.",
+      "Ensure strict adherence to secure data handling procedures and enterprise security frameworks.",
+      "Provide peer support and technical escalation review for complex cross-platform user tickets.",
+      "Document root-cause analyses and standardized technical resolution knowledge-base articles."
     ],
     technologies: ["Enterprise ITIL", "Hardware Diagnostics", "Secure Data Handling", "Incident Escalation", "Windows/Linux Systems"]
   },
@@ -405,8 +405,8 @@ export const PORTS_DATA: PortConnection[] = [
     name: "Encrypted Dispatch Port",
     protocol: "SMTP / TLS",
     label: "Direct Email",
-    value: "marbusiness98@gmail.com",
-    href: "mailto:marbusiness98@gmail.com?subject=Contact%20Amari&body=Hey%20Amari,",
+    value: "redthemadhacker@gmail.com",
+    href: "mailto:redthemadhacker@gmail.com?subject=Contact%20Amari&body=Hey%20Amari,",
     iconName: "mail",
     status: "ACTIVE",
     description: "Primary communication channel for project inquiries, technical roles, and collaboration."
