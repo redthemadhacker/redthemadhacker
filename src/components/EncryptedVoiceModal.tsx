@@ -24,7 +24,8 @@ export const EncryptedVoiceModal: React.FC<EncryptedVoiceModalProps> = ({
 
   const handleInitiateCall = () => {
     // Direct system dialer invocation without ever displaying plain digits in DOM
-    window.location.href = 'tel:9856451621';
+    // Obfuscated string decodes to 'tel:7066100225' at runtime to prevent scraping
+    window.location.href = atob('dGVsOjcwNjYxMDAyMjU=');
     onClose();
   };
 
