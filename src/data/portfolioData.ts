@@ -393,7 +393,7 @@ export const PORTS_DATA: PortConnection[] = [
     protocol: "TEL / ENCRYPTED",
     label: "Encrypted Voice Line",
     value: "[ENCRYPTED_COMMS_SOCKET]",
-    href: "tel:9856451621",
+    href: "dGVsOisxNzA2NjEwMDIyNQ==",
     iconName: "phone",
     status: "ONLINE",
     isEncrypted: true,

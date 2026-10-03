@@ -25,7 +25,6 @@ interface ConnectionPortsSectionProps {
 export const ConnectionPortsSection: React.FC<ConnectionPortsSectionProps> = ({
   onNavigate,
   onOpenTerminal,
-  onOpenVoiceModal,
 }) => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -57,12 +56,12 @@ export const ConnectionPortsSection: React.FC<ConnectionPortsSectionProps> = ({
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
-    // Trigger direct mailto with populated fields
+    // Trigger direct mailto with populated fields (Patched to redthemadhacker)
     const subject = encodeURIComponent(`[INQUIRY] from ${formData.name}: ${formData.roleOrSubject || 'Technical Engagement'}`);
     const body = encodeURIComponent(
       `From: ${formData.name} (${formData.email})\n\nSubject: ${formData.roleOrSubject}\n\nMessage:\n${formData.message}\n\nSent via The Mad Hacker Portfolio Hub`
     );
-    window.location.href = `mailto:marbusiness98@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:redthemadhacker@gmail.com?subject=${subject}&body=${body}`;
     setFormSent(true);
     setTimeout(() => setFormSent(false), 5000);
   };
@@ -129,7 +128,9 @@ export const ConnectionPortsSection: React.FC<ConnectionPortsSectionProps> = ({
 
                   {/* Target Value Box */}
                   <div className="mt-4 p-3 rounded bg-zinc-900/90 border border-zinc-800 font-mono-code text-xs text-zinc-300 flex items-center justify-between break-all">
-                    <span className="truncate pr-2">{port.value}</span>
+                    <span className="truncate pr-2">
+                      {port.isEncrypted ? '••••••••••' : port.value}
+                    </span>
                     <button
                       type="button"
                       onClick={() => handleCopy(port.id, port.value)}
@@ -152,12 +153,17 @@ export const ConnectionPortsSection: React.FC<ConnectionPortsSectionProps> = ({
                     <button
                       type="button"
                       onClick={() => {
-                        if (onOpenVoiceModal) onOpenVoiceModal();
+                        try {
+                          // Decrypts the base64 encoded link on the fly to bypass bots
+                          window.location.href = atob(port.href);
+                        } catch (err) {
+                          console.error("Decryption failed. Ensure href is a valid Base64 string.");
+                        }
                       }}
                       className="w-full py-2.5 px-4 text-xs font-mono-code font-bold text-black bg-[#ff1a2a] hover:bg-[#ff3342] rounded transition-all flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(255,26,42,0.3)] active:scale-95 cursor-pointer"
                     >
                       <Lock className="w-4 h-4" />
-                      <span>SECURE VOICE TUNNEL</span>
+                      <span>DECRYPT & CONNECT</span>
                     </button>
                   ) : (
                     <a
@@ -183,7 +189,7 @@ export const ConnectionPortsSection: React.FC<ConnectionPortsSectionProps> = ({
               <span className="w-2.5 h-2.5 rounded-full bg-[#ff1a2a]" />
               <span className="text-white font-bold">TERMINAL DISPATCH PROTOCOL</span>
             </div>
-            <span className="text-zinc-500">TARGET: MARBUSINESS98@GMAIL.COM</span>
+            <span className="text-zinc-500">TARGET: REDTHEMADHACKER@GMAIL.COM</span>
           </div>
 
           <form onSubmit={handleFormSubmit} className="space-y-4">
