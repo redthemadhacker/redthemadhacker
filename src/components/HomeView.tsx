@@ -188,7 +188,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onOpenTerminal }
               </p>
             </div>
             <div className="mt-3 flex items-center gap-1 text-[#ff1a2a] text-[11px] font-bold">
-              <span>VIEW REPO</span>
+              <span>LAUNCH LAB</span>
               <ExternalLink className="w-3 h-3" />
             </div>
           </a>
