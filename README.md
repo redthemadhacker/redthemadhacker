@@ -1,7 +1,6 @@
 # Red The Mad Hacker // Developer Portfolio & Systems Dossier
 
 > **Live Production:** [https://www.redthemadhacker.engineer](https://www.redthemadhacker.engineer)  
-> `root@madhackerpc:~# code // coffee // create // EST. 2026`
 
 ---
 
